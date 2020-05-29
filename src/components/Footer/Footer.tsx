@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import './style.css';
 
-function Footer<FunctionComponent>() {
+const Footer: FunctionComponent = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="footer">
@@ -8,6 +9,6 @@ function Footer<FunctionComponent>() {
       {currentYear}
     </footer>
   );
-}
+};
 
 export default Footer;
