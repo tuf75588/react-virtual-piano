@@ -4,9 +4,10 @@ import Logo from './components/Logo/Logo';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       this will eventually have a piano
       <Logo />
+      <main className="app-content" />
       <Footer />
     </div>
   );
