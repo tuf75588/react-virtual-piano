@@ -14,7 +14,7 @@ Sharp (#) is a sign which tells us that a given note is "sharp." There are also 
 
 On a musical keyboard, they would be positioned like this. White keys are naturals and black keys are sharp.
 
-![Piano image](https://nyc3.digitaloceanspaces.com/atd285/piano.png)
+![Piano image](/src/static/piano.png)
 
 ---
 
