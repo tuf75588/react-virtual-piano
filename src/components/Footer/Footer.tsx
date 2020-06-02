@@ -6,7 +6,11 @@ const Footer: FunctionComponent = () => {
   return (
     <footer className="footer">
       <br />
-      {currentYear}
+      Made with{' '}
+      <span role="img" aria-label="heart">
+        💗
+      </span>{' '}
+      by Andrew Davis (atd285) - {currentYear}
     </footer>
   );
 };
