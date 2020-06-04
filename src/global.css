@@ -15,6 +15,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  appearance: none;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  cursor: pointer;
+  --webkit-font-smoothing: inherit;
+  --moz-osx-font-smoothing: inherit;
+}
+
 .app {
   min-height: 100vh;
 }
@@ -28,4 +43,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.key {
+  position: relative;
+  font-size: var(--font-size);
+  border-radius: 0 0 var(--radius) var(--radius);
+  text-transform: uppercase;
+  user-select: none;
 }
