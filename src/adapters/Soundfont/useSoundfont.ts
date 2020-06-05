@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react';
 import { Optional } from '../../domain/types';
-import { InstrumentName, Player } from 'soundfont-player';
+import Soundfont, { InstrumentName, Player } from 'soundfont-player';
 import { MidiValue } from '../../domain/note';
-import { AudioNodesRegistery } from '../../domain/sound';
+import { AudioNodesRegistery, DEFAULT_INSTRUMENT } from '../../domain/sound';
+import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from 'constants';
 // this will describe what our useSoundfont() custom hook requires
 interface Settings {
   AudioContext: AudioContextType;
@@ -26,13 +27,36 @@ function useSoundfont({ AudioContext }: Settings): Adapted {
   const [player, setPlayer] = useState<Optional<Player>>(null);
   // instantiate a new audio player reference
   const audio = useRef(new AudioContext());
-  return {
-    loading: true,
-    current: 'acoustic_grand_piano',
-    stop: () => console.log('stop'),
-    play: () => console.log('play'),
-    load: () => console.log('load'),
+  const load = async (instrument: InstrumentName = DEFAULT_INSTRUMENT) => {
+    setLoading(true);
+    const player = await Soundfont.instrument(audio.current, instrument);
+    setLoading(false);
+    setCurrent(instrument);
+    setPlayer(player);
   };
+
+  const play = async (note: MidiValue) => {
+    await resume();
+    if (!player) return;
+    const node = player.play(note.toString());
+    activeNodes = { ...activeNodes, [note]: node };
+  };
+
+  const stop = async (note: MidiValue) => {
+    await resume();
+    if (!activeNodes[note]) return;
+
+    // the ! is the "non-null" assertion operator, basically telling TS we know more than the compiler does, and this value will not be null
+    activeNodes[note]!.stop();
+    activeNodes = { ...activeNodes, [note]: null };
+  };
+
+  // for hoisting
+  async function resume() {
+    return audio.current.state === 'suspended'
+      ? await audio.current.resume()
+      : Promise.resolve();
+  }
 }
 
 export default useSoundfont;
