@@ -71,3 +71,5 @@ export function generateNotes({
     return fromMidi(fromNote + index);
   });
 }
+
+export const notes = generateNotes();

@@ -1,16 +1,24 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactEventHandler } from 'react';
 import { NoteType } from '../../domain/note';
 import clsx from 'clsx';
 interface KeyProps {
   type: NoteType;
   label: string;
   disabled?: boolean;
+  onUp: ReactEventHandler<HTMLButtonElement>;
+  onDown: ReactEventHandler<HTMLButtonElement>;
 }
 
 function Key(props: KeyProps): ReactElement<KeyProps> {
-  const { label, type, ...rest } = props;
+  const { label, type, onUp, onDown, ...rest } = props;
   return (
-    <button className={clsx(`key key--${type}`)} type="button" {...rest}>
+    <button
+      className={clsx(`key key--${type}`)}
+      type="button"
+      {...rest}
+      onMouseUp={onUp}
+      onMouseDown={onDown}
+    >
       {label}
     </button>
   );

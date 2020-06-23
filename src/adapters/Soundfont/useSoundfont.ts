@@ -3,7 +3,6 @@ import { Optional } from '../../domain/types';
 import Soundfont, { InstrumentName, Player } from 'soundfont-player';
 import { MidiValue } from '../../domain/note';
 import { AudioNodesRegistery, DEFAULT_INSTRUMENT } from '../../domain/sound';
-import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from 'constants';
 // this will describe what our useSoundfont() custom hook requires
 interface Settings {
   AudioContext: AudioContextType;
@@ -46,7 +45,11 @@ function useSoundfont({ AudioContext }: Settings): Adapted {
     await resume();
     if (!activeNodes[note]) return;
 
-    // the ! is the "non-null" assertion operator, basically telling TS we know more than the compiler does, and this value will not be null
+    /*
+        // the ! is the "non-null" assertion operator,
+        basically telling TS we know more than the compiler does,
+        and this value will not be null since we check for that in the line above
+    */
     activeNodes[note]!.stop();
     activeNodes = { ...activeNodes, [note]: null };
   };
