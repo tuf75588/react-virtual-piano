@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Key} from 'react';
+import {useEffect, useState} from 'react';
 import {Key as KeyLabel} from '../../domain/keyboard';
 type IsPressed = boolean;
 
