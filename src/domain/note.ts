@@ -15,7 +15,7 @@ export interface Note {
   octave: OctaveIndex;
 }
 
-interface NoteGeneratorSettings {
+interface NotesGeneratorSettings {
   fromNote?: MidiValue;
   toNote?: MidiValue;
 }
@@ -66,10 +66,10 @@ export function fromMidi(midi: MidiValue): Note {
 export function generateNotes({
   fromNote = LOWER_NOTE,
   toNote = HIGHER_NOTE,
-}: NoteGeneratorSettings = {}): Note[] {
-  return [toNote - fromNote + 1].fill(0).map((_, index: number) => {
-    return fromMidi(fromNote + index);
-  });
+}: NotesGeneratorSettings = {}): Note[] {
+  return new Array(toNote - fromNote + 1)
+    .fill(0)
+    .map((_, index: number) => fromMidi(fromNote + index));
 }
 
 export const notes = generateNotes();
