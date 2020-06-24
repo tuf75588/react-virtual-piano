@@ -20,7 +20,7 @@ interface Adapted {
 
 function useSoundfont({ AudioContext }: Settings): Adapted {
   let activeNodes: AudioNodesRegistery = {};
-  const [current, setCurrent] = useState<Optional<InstrumentName>>();
+  const [current, setCurrent] = useState<Optional<InstrumentName>>(null);
   const [loading, setLoading] = useState(false);
   // player comes from the soundfont package
   const [player, setPlayer] = useState<Optional<Player>>(null);
@@ -60,6 +60,13 @@ function useSoundfont({ AudioContext }: Settings): Adapted {
       ? await audio.current.resume()
       : Promise.resolve();
   }
+  return {
+    loading,
+    current,
+    load,
+    play,
+    stop,
+  };
 }
 
 export default useSoundfont;
