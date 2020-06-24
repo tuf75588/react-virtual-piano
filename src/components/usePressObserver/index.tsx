@@ -17,7 +17,7 @@ function fromEventCode(code: EventCode) {
 }
 
 function equal(watchedKey: KeyLabel, eventCode: EventCode) {
-  return fromEventCode(eventCode).toUpperCase() === watchKey.toUpperCase();
+  return fromEventCode(eventCode).toUpperCase() === watchedKey.toUpperCase();
 }
 
 function usePressObserver({
