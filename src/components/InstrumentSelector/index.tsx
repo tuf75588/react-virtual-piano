@@ -1,7 +1,7 @@
 import React from 'react';
 import {useInstrument} from '../../state/Context';
 import {InstrumentName} from 'soundfont-player';
-
+import {options} from './options';
 function InstrumentSelector() {
   const {instrument, setInstrument} = useInstrument();
   const updateValue = ({
@@ -12,7 +12,10 @@ function InstrumentSelector() {
 
   return (
     <select className="instruments" onChange={updateValue} value={instrument}>
-      select select select
+      {options.map((item) => {
+        console.log(item);
+        return <option value={item.value}>{item.label}</option>;
+      })}
     </select>
   );
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import NoAudioMessage from '../NoAudioMessage/NoAudioMessage';
 import useAudioContext from '../AudioContextProvider/useAudioContext';
-import KeyboardWithInstrument from '../Keyboard/WithInstrument';
+import Playground from '../Playground';
 
 function Main(): JSX.Element {
   const audioContext = useAudioContext();
-  return !!audioContext ? <KeyboardWithInstrument /> : <NoAudioMessage />;
+  return !!audioContext ? <Playground /> : <NoAudioMessage />;
 }
 
 export default Main;
