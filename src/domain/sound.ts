@@ -3,4 +3,4 @@ import { MidiValue } from './note';
 import { Optional } from './types';
 
 export const DEFAULT_INSTRUMENT: InstrumentName = 'acoustic_grand_piano';
-export type AudioNodesRegistery = Record<MidiValue, Optional<Player>>;
+export type AudioNodesRegistry = Record<MidiValue, Optional<Player>>;

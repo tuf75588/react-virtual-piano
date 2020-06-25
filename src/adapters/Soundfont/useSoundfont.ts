@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react';
-import { Optional } from '../../domain/types';
-import Soundfont, { InstrumentName, Player } from 'soundfont-player';
-import { MidiValue } from '../../domain/note';
-import { AudioNodesRegistery, DEFAULT_INSTRUMENT } from '../../domain/sound';
+import {useState, useRef} from 'react';
+import {Optional} from '../../domain/types';
+import Soundfont, {InstrumentName, Player} from 'soundfont-player';
+import {MidiValue} from '../../domain/note';
+import {AudioNodesRegistry, DEFAULT_INSTRUMENT} from '../../domain/sound';
 // this will describe what our useSoundfont() custom hook requires
 interface Settings {
   AudioContext: AudioContextType;
@@ -18,8 +18,8 @@ interface Adapted {
   stop: (note: MidiValue) => Promise<void>;
 }
 
-function useSoundfont({ AudioContext }: Settings): Adapted {
-  let activeNodes: AudioNodesRegistery = {};
+function useSoundfont({AudioContext}: Settings): Adapted {
+  let activeNodes: AudioNodesRegistry = {};
   const [current, setCurrent] = useState<Optional<InstrumentName>>(null);
   const [loading, setLoading] = useState(false);
   // player comes from the soundfont package
@@ -38,7 +38,7 @@ function useSoundfont({ AudioContext }: Settings): Adapted {
     await resume();
     if (!player) return;
     const node = player.play(note.toString());
-    activeNodes = { ...activeNodes, [note]: node };
+    activeNodes = {...activeNodes, [note]: node};
   };
 
   const stop = async (note: MidiValue) => {
@@ -51,7 +51,7 @@ function useSoundfont({ AudioContext }: Settings): Adapted {
         and this value will not be null since we check for that in the line above
     */
     activeNodes[note]!.stop();
-    activeNodes = { ...activeNodes, [note]: null };
+    activeNodes = {...activeNodes, [note]: null};
   };
 
   // for hoisting

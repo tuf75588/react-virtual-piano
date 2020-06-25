@@ -13,8 +13,11 @@ function InstrumentSelector() {
   return (
     <select className="instruments" onChange={updateValue} value={instrument}>
       {options.map((item) => {
-        console.log(item);
-        return <option value={item.value}>{item.label}</option>;
+        return (
+          <option key={item.value} value={item.value}>
+            {item.label}
+          </option>
+        );
       })}
     </select>
   );

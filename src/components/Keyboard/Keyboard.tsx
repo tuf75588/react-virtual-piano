@@ -1,6 +1,6 @@
 import React from 'react';
-import { OctavesRange, selectKey } from '../../domain/keyboard';
-import { notes, MidiValue } from '../../domain/note';
+import {OctavesRange, selectKey} from '../../domain/keyboard';
+import {notes, MidiValue} from '../../domain/note';
 import Key from '../Key/Key';
 
 export interface KeyboardProps {
@@ -9,10 +9,10 @@ export interface KeyboardProps {
   stop: (note: MidiValue) => Promise<void>;
 }
 
-function Keyboard<KeyboardProps>({ loading, stop, play }: any): JSX.Element {
+function Keyboard({loading, stop, play}: KeyboardProps) {
   return (
     <div className="keyboard">
-      {notes.map(({ midi, type, index, octave }) => {
+      {notes.map(({midi, type, index, octave}) => {
         const label = selectKey(octave as OctavesRange, index);
         return (
           <Key
